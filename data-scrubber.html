@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Qualtrics Survey Data Scrubber</title>
+    <style>
+        /* Add some basic styles to make the page look nicer */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        /* Add a style for the selected columns' header cells */
+        th.selected-column {
+            background-color: #ffffcc; /* You can change this color to your preference */
+        }
+        /* Add a style for the data cells in the selected columns */
+        td.selected-column {
+            background-color: #f2f2f2; /* You can change this color to your preference */
+        }
+        #file-input {
+            padding:20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            background-color: rgb(213, 213, 213)
+        }
+    
+    </style>
+</head>
+<body>
+    <h1>Qualtrics Survey Data Scrubber</h1>
+    <a href="https://uploads-ssl.webflow.com/64d2acaed3d8073cdbc0ff98/64ef8083d63f8e986cfc0ddc_Sample%20Qualtrics%20Survey.csv" download="data.csv">Download the sample csv to get started</a><br><br>
+    <div id="file-input">
+        <input type="file" id="csvFile" accept=".csv">
+        <button onclick="handleFile()">Upload</button>
+    </div>
+    
+    <!-- New form with the dropdown menus and input field -->
+    <form id="selectRangeForm">
+        <h3>Straight-lining Check</h3>
+        <label for="startColumn">Start point:</label>
+        <select id="startColumn" name="startColumn"></select><br>
+        <label for="endColumn">Endpoint:</label>
+        <select id="endColumn" name="endColumn"></select><br>
+        <label for="range">Number of consecutive answers:</label>
+        <input type="number" id="range" name="range" min="1" value="1"><br><br>
+
+        <input type="button" value="Check for Straight-lining" onclick="checkMatchingConsecutiveValues()">
+
+
+        <h3>Zigzagging Check</h3>
+        <label for="startColumnZigzag">Start column:</label>
+        <select id="startColumnZigzag" name="startColumnZigzag"></select><br>
+        <label for="endColumnZigzag">End column:</label>
+        <select id="endColumnZigzag" name="endColumnZigzag"></select><br>
+        <label for="rangeZigzag">Number of consecutive zigzags:</label>
+        <input type="number" id="rangeZigzag" name="rangeZigzag" min="1" value="1"><br><br>
+
+        <input type="button" value="Check for Zigzagging" onclick="checkZigzaggingValues()">
+    </form>
+
+    <div id="csvData"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="scrubber-logic.js"></script>
+</body>
+</html>
+
